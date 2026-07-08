@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold Rate Today &amp; Silver Rate Today India | 24K, 22K, 999 Silver Price</title>
+<meta name="description" content="Live gold rate today and silver rate today in India. 24K, 22K, 18K gold price per gram/10 gram and 999/925 silver price per gram/kg, with historical charts. आज का सोना और चांदी भाव।">
+<link rel="canonical" href="https://akhairkar.github.io/MetalRatesIndia/pages/gold-silver-rate-today.html">
+<meta name="theme-color" content="#0e1116">
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" href="../icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>window.DATA_ROOT = '../';</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://akhairkar.github.io/MetalRatesIndia/"},
+    {"@type":"ListItem","position":2,"name":"Gold & Silver Rate Today","item":"https://akhairkar.github.io/MetalRatesIndia/pages/gold-silver-rate-today.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="ticker-wrap"><div class="ticker-track" id="tickerTrack"><span class="ticker-item mono">Loading live rates…</span></div></div>
+  <div class="container nav-row">
+    <a href="../index.html" class="brand"><span class="mark">MR</span><span>Metal Rates<span style="color:var(--accent)">India</span><small>Live market data</small></span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="../index.html">Rates</a>
+      <a href="../index.html#historical">Historical Data</a>
+      <a href="gold-silver-rate-today.html" class="active">Gold &amp; Silver</a>
+      <a href="../index.html#faq">FAQs</a>
+      <a href="../admin.html">Admin</a>
+    </nav>
+    <div class="header-actions">
+      <button class="search-btn" id="searchOpenBtn">🔍 <span>Search…</span></button>
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+      <button class="hamburger" id="hamburger">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box"><input type="text" id="searchInput" placeholder="Search Copper, Brass, Gold, तांबा…" autocomplete="off"><div class="search-results" id="searchResults"></div></div>
+</div>
+
+<main>
+  <section class="detail-hero container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / Gold &amp; Silver Rate Today</div>
+    <div class="detail-head">
+      <div class="sym-lg" style="background:#d4af37">AU</div>
+      <div><h1>Gold &amp; Silver Rate Today <span class="hi-name">· सोना और चांदी भाव</span></h1></div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="precious-grid" id="preciousDetailGrid">
+        <div class="skeleton" style="height:360px"></div>
+        <div class="skeleton" style="height:360px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="eyebrow">HISTORICAL DATA</div><h2>Gold vs Silver — price trend</h2></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-tabs" style="margin-bottom:18px;">
+          <button class="chart-tab" data-range="7D">7D</button>
+          <button class="chart-tab active" data-range="30D">30D</button>
+          <button class="chart-tab" data-range="1Y">1Y</button>
+        </div>
+        <div class="chart-wrap"><canvas id="preciousChart"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head"><div><div class="eyebrow">FAQ</div><h2>Gold &amp; Silver rate — FAQs</h2></div></div>
+      <div class="faq-list">
+        <div class="faq-item open"><div class="faq-q"><span>What is today's 22K gold rate per gram?</span><span class="plus">+</span></div><div class="faq-a">Today's 22K gold rate is shown live above in INR per gram, updated daily alongside 24K and 18K purities.</div></div>
+        <div class="faq-item"><div class="faq-q"><span>What is the difference between 24K and 22K gold?</span><span class="plus">+</span></div><div class="faq-a">24K gold is 99.9% pure with no alloying, while 22K (91.6% pure) is mixed with metals like copper or silver for added strength, commonly used in jewellery.</div></div>
+        <div class="faq-item"><div class="faq-q"><span>What is the difference between 999 and 925 silver?</span><span class="plus">+</span></div><div class="faq-a">999 silver is fine silver at 99.9% purity, typically used for coins and bars, while 925 (sterling) silver is 92.5% pure, alloyed with other metals for jewellery durability.</div></div>
+        <div class="faq-item"><div class="faq-q"><span>Do gold rates include GST and making charges?</span><span class="plus">+</span></div><div class="faq-a">No — the rates shown are base metal prices only. Jewellers add GST and making charges separately at the time of purchase.</div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Metal Rates India. All rates are indicative, not for legal/trade settlement.</span>
+      <a href="../index.html">← Back to all metal rates</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/charts.js"></script>
+<script src="../js/script.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try{
+    const [metalsRes, preciousRes] = await Promise.all([fetch('../data/metals.json'), fetch('../data/goldsilver.json')]);
+    const metalsJson = await metalsRes.json();
+    const preciousJson = await preciousRes.json();
+    const all = Object.values(metalsJson.metals);
+
+    const track = document.getElementById('tickerTrack');
+    const items = all.map(x => {
+      const cls = x.change >= 0 ? 'up' : 'down';
+      const arrow = x.change >= 0 ? '▲' : '▼';
+      return `<span class="ticker-item mono"><b>${x.symbol}</b> ${x.name} ₹${fmtINR(x.rate)} <span class="${cls}">${arrow} ${Math.abs(x.changePct)}%</span></span>`;
+    }).join('');
+    track.innerHTML = items + items;
+
+    const precious = Object.values(preciousJson.precious);
+    document.getElementById('preciousDetailGrid').innerHTML = precious.map(p => preciousCardHTML(p)).join('');
+
+    /* build pseudo-history using the 24K/999 purity series for the comparison chart */
+    const seriesList = precious.map(p => {
+      const firstKey = Object.keys(p.purities)[0];
+      return { name: p.name, color: p.color, history: p.purities[firstKey].history };
+    });
+
+    let chart = null;
+    const canvas = document.getElementById('preciousChart');
+    function render(range){
+      if(chart) chart.destroy();
+      chart = drawMainChart(canvas, seriesList, range);
+    }
+    render('30D');
+    document.querySelectorAll('.chart-tab').forEach(tab => tab.addEventListener('click', () => {
+      document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      render(tab.dataset.range);
+    }));
+  }catch(e){ console.error(e); }
+});
+</script>
+</body>
+</html>

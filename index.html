@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metal Rates India | Live Copper, Steel, Aluminium, Gold &amp; Silver Prices Today</title>
+<meta name="description" content="Live metal rates in India — Copper, Brass, Aluminium, Iron, Steel, Stainless Steel, Zinc, Lead, Nickel, Tin, Gold and Silver. Daily updated per kg prices, 1-year historical charts and scrap rate guides. आज का धातु भाव।">
+<link rel="canonical" href="https://akhairkar.github.io/MetalRatesIndia/">
+<meta property="og:title" content="Metal Rates India | Live Metal Prices Today">
+<meta property="og:description" content="Daily updated live rates for 10 metals plus Gold &amp; Silver across India, with historical charts and scrap guides.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akhairkar.github.io/MetalRatesIndia/">
+<meta property="og:image" content="https://akhairkar.github.io/MetalRatesIndia/icons/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e1116">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>window.DATA_ROOT = './';</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Metal Rates India",
+  "url": "https://akhairkar.github.io/MetalRatesIndia/",
+  "potentialAction": { "@type": "SearchAction", "target": "https://akhairkar.github.io/MetalRatesIndia/?q={search_term}", "query-input": "required name=search_term" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Metal Rates India",
+  "url": "https://akhairkar.github.io/MetalRatesIndia/",
+  "logo": "https://akhairkar.github.io/MetalRatesIndia/icons/icon-512.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"How often are metal rates updated?","acceptedAnswer":{"@type":"Answer","text":"Rates are refreshed automatically once every day via a scheduled data pipeline, and shown with an exact last-updated timestamp on every page."}},
+    {"@type":"Question","name":"Are these rates the same as MCX or LME prices?","acceptedAnswer":{"@type":"Answer","text":"Rates are derived from international benchmark prices converted to INR per kilogram, and are meant as a reference for scrap and trading decisions rather than an exact exchange quote."}},
+    {"@type":"Question","name":"Can I see historical prices for a metal?","acceptedAnswer":{"@type":"Answer","text":"Yes, every metal has its own page with 7-day, 30-day and 1-year historical charts, along with 52-week high, low and average."}},
+    {"@type":"Question","name":"Do you provide rates for different scrap grades?","acceptedAnswer":{"@type":"Answer","text":"Each metal page includes a scrap grade table showing typical price ranges for common grades bought and sold by dealers."}}
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item mono">Loading live rates…</span>
+    </div>
+  </div>
+  <div class="container nav-row">
+    <a href="index.html" class="brand">
+      <span class="mark">MR</span>
+      <span>Metal Rates<span style="color:var(--accent)">India</span><small>Live market data</small></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" class="active">Rates</a>
+      <a href="#historical">Historical Data</a>
+      <a href="pages/gold-silver-rate-today.html">Gold &amp; Silver</a>
+      <a href="#faq">FAQs</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+    <div class="header-actions">
+      <button class="search-btn" id="searchOpenBtn" aria-label="Search metals">
+        🔍 <span>Search… <kbd style="opacity:.6">Ctrl K</kbd></span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Copper, Brass, Gold, तांबा…" autocomplete="off">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow"><span class="dot"></span> LIVE MARKET DATA · Updated <span id="lastUpdated">moments ago</span></div>
+      <h1>India's metal market,<br>read <span class="hi">in real time.</span></h1>
+      <p class="lead">Live rates for Copper, Brass, Aluminium, Iron, Steel and six other metals — tracked daily with historical charts, 52-week ranges and scrap guides serious buyers actually need. आज का धातु भाव, एक ही जगह।</p>
+      <div class="hero-ctas">
+        <a href="#rates" class="btn btn-primary">View Today's Rates</a>
+        <a href="#historical" class="btn btn-outline">Explore Historical Data</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>10</b><span>Metals tracked</span></div>
+        <div class="stat"><b>365+</b><span>Days of history</span></div>
+        <div class="stat"><b>Daily</b><span>Rate refresh</span></div>
+        <div class="stat"><b>2</b><span>Precious metals</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="precious">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="eyebrow">PREMIUM METALS</div><h2>Gold &amp; Silver <span class="hi-sub">· सोना और चांदी</span></h2></div>
+        <div class="desc">Tracked separately from base metals, in 24K/22K/18K gold and 999/925 silver purities.</div>
+      </div>
+      <div class="precious-grid" id="preciousGrid">
+        <div class="skeleton" style="height:280px"></div>
+        <div class="skeleton" style="height:280px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="rates">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="eyebrow">TODAY'S RATES</div><h2>Live rates, per kilogram</h2></div>
+        <div class="desc">Tap any metal for its full price history &amp; buying guide.</div>
+      </div>
+      <div class="metal-grid" id="metalGrid">
+        <div class="skeleton" style="height:210px"></div>
+        <div class="skeleton" style="height:210px"></div>
+        <div class="skeleton" style="height:210px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="historical">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="eyebrow">HISTORICAL DATA</div><h2>Price trends over time <span class="hi-sub">· साप्ताहिक चार्ट</span></h2></div>
+      </div>
+      <div class="chart-card">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:6px;">
+          <div class="chart-tabs">
+            <button class="chart-tab" data-range="7D">7D</button>
+            <button class="chart-tab active" data-range="30D">30D</button>
+            <button class="chart-tab" data-range="1Y">1Y</button>
+          </div>
+        </div>
+        <div class="metal-switcher" id="metalSwitcher"></div>
+        <div class="chart-wrap"><canvas id="mainChart"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="eyebrow">FAQ</div><h2>Frequently asked questions</h2></div>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item open">
+          <div class="faq-q"><span>How often are metal rates updated?</span><span class="plus">+</span></div>
+          <div class="faq-a">Rates are refreshed automatically once every day via a scheduled data pipeline, and shown with an exact last-updated timestamp on every page.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Are these rates the same as MCX or LME prices?</span><span class="plus">+</span></div>
+          <div class="faq-a">Rates are derived from international benchmark prices converted to INR per kilogram, meant as a reliable reference for scrap and trading decisions rather than an exact exchange tick.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Can I see historical prices for a metal?</span><span class="plus">+</span></div>
+          <div class="faq-a">Yes — every metal has its own page with 7-day, 30-day and 1-year historical charts, plus 52-week high, low and average.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Do you provide rates for different scrap grades?</span><span class="plus">+</span></div>
+          <div class="faq-a">Each metal page includes a scrap grade table showing typical price ranges for the grades dealers commonly buy and sell.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="wa-banner">
+        <div>
+          <h3>Get rates on WhatsApp, every morning</h3>
+          <p>Join the daily broadcast list — no spam, just today's numbers at 8 AM IST.</p>
+        </div>
+        <a class="btn btn-whatsapp" href="https://wa.me/910000000000?text=Send%20me%20daily%20metal%20rates" target="_blank" rel="noopener">📲 Join on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:10px;"><span class="mark">MR</span><span>Metal Rates India</span></div>
+        <p style="color:var(--text-dim);font-size:.88rem;max-width:320px;">India's daily-updated reference for base and precious metal prices — built for scrap dealers, traders, fabricators and recyclers.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul><li><a href="index.html">Rates</a></li><li><a href="#historical">Historical Data</a></li><li><a href="pages/gold-silver-rate-today.html">Gold &amp; Silver</a></li><li><a href="admin.html">Admin</a></li></ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul><li><a href="pages/disclaimer.html">Disclaimer</a></li><li><a href="pages/privacy-policy.html">Privacy Policy</a></li><li><a href="pages/terms.html">Terms</a></li></ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul><li><a href="pages/contact.html">Contact</a></li><li><a href="https://github.com/akhairkar/MetalRatesIndia" target="_blank" rel="noopener">GitHub Repository</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Metal Rates India. All rates are indicative, not for legal/trade settlement.</span>
+      <span>Last updated: <span id="footerUpdated">—</span></span>
+    </div>
+  </div>
+</footer>
+
+<div class="install-toast" id="installToast">
+  <span>Install Metal Rates India for offline access</span>
+  <button class="btn btn-primary" id="installBtn" style="padding:8px 14px;">Install</button>
+  <button class="btn btn-outline" id="dismissInstall" style="padding:8px 14px;">Not now</button>
+</div>
+
+<script src="js/charts.js"></script>
+<script src="js/script.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.addEventListener('DOMContentLoaded', () => {
+    fetch('data/metals.json').then(r=>r.json()).then(j => {
+      document.getElementById('footerUpdated').textContent = fmtDate(j.updated);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Metal Rates India</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="icons/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<script>window.DATA_ROOT = './';</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav-row">
+    <a href="index.html" class="brand"><span class="mark">MR</span><span>Metal Rates<span style="color:var(--accent)">India</span><small>Admin</small></span></a>
+    <div class="header-actions"><button class="theme-toggle" id="themeToggle">🌙</button></div>
+  </div>
+</header>
+
+<div class="admin-shell">
+
+  <div id="loginView">
+    <div class="admin-card">
+      <h1 style="font-family:var(--ff-display);font-size:1.4rem;margin-top:0;">Admin sign-in</h1>
+      <p style="color:var(--text-dim);font-size:.88rem;">This is a lightweight backup panel — the site runs fully on automatic daily rate fetching. Use this only if the automation needs a manual override.</p>
+      <div class="field">
+        <label>Admin password</label>
+        <input type="password" id="pwInput" placeholder="Enter password">
+      </div>
+      <button class="btn btn-primary" id="loginBtn" style="width:100%;justify-content:center;">Sign in</button>
+      <p id="loginError" style="color:var(--down);font-size:.82rem;display:none;margin-top:10px;">Incorrect password.</p>
+      <p style="color:var(--text-faint);font-size:.75rem;margin-top:16px;">Default password is <code>metalrates2026</code> — change it in <code>js/admin.js</code> before deploying publicly.</p>
+    </div>
+  </div>
+
+  <div id="panelView" style="display:none;">
+    <div class="admin-card" style="margin-bottom:20px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <h1 style="font-family:var(--ff-display);font-size:1.3rem;margin:0;">Manual rate override</h1>
+        <button class="btn btn-outline" id="logoutBtn" style="padding:8px 14px;">Sign out</button>
+      </div>
+      <p style="color:var(--text-dim);font-size:.85rem;">Live JSON data: <span id="lastFetched" class="badge">loading…</span></p>
+    </div>
+
+    <div class="admin-card" style="margin-bottom:20px;">
+      <div class="field">
+        <label>Metal</label>
+        <select id="metalSelect"></select>
+      </div>
+      <div class="admin-row">
+        <div class="field"><label>New rate (₹ per kg)</label><input type="number" step="0.01" id="rateInput"></div>
+        <div class="field"><label>Effective date</label><input type="date" id="dateInput"></div>
+      </div>
+      <button class="btn btn-primary" id="applyBtn" style="width:100%;justify-content:center;">Apply override</button>
+      <p style="color:var(--text-faint);font-size:.78rem;margin-top:12px;">
+        This runs entirely in your browser — GitHub Pages has no server, so an override here does not change the live site.
+        Applying generates an updated <code>metals.json</code> below: copy it and commit it to <code>/data/metals.json</code>
+        in your repo (or paste into GitHub's web editor) to publish it.
+      </p>
+    </div>
+
+    <div class="admin-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <label style="font-size:.8rem;color:var(--text-dim);">Updated metals.json</label>
+        <button class="btn btn-outline" id="copyJsonBtn" style="padding:7px 14px;font-size:.8rem;">Copy JSON</button>
+      </div>
+      <textarea id="jsonOutput" readonly style="width:100%;height:220px;background:var(--bg-raised);border:1px solid var(--border);border-radius:8px;color:var(--text-dim);font-family:var(--ff-mono);font-size:.78rem;padding:12px;"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/script.js"></script>
+<script>
+const ADMIN_PASSWORD = "metalrates2026"; // ⚠️ change before real deployment
+let currentData = null;
+
+document.getElementById('loginBtn').addEventListener('click', () => {
+  const val = document.getElementById('pwInput').value;
+  if(val === ADMIN_PASSWORD){
+    sessionStorage.setItem('mri-admin', '1');
+    showPanel();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+});
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  sessionStorage.removeItem('mri-admin');
+  location.reload();
+});
+
+async function showPanel(){
+  document.getElementById('loginView').style.display = 'none';
+  document.getElementById('panelView').style.display = 'block';
+  const res = await fetch('data/metals.json');
+  currentData = await res.json();
+  document.getElementById('lastFetched').textContent = fmtDate(currentData.updated);
+  const select = document.getElementById('metalSelect');
+  select.innerHTML = Object.values(currentData.metals).map(m => `<option value="${m.id}">${m.name} (₹${fmtINR(m.rate)})</option>`).join('');
+  document.getElementById('dateInput').value = new Date().toISOString().slice(0,10);
+}
+
+document.getElementById('applyBtn').addEventListener('click', () => {
+  const id = document.getElementById('metalSelect').value;
+  const newRate = parseFloat(document.getElementById('rateInput').value);
+  if(!id || isNaN(newRate)) return;
+  const m = currentData.metals[id];
+  m.yesterday = m.rate;
+  m.rate = newRate;
+  m.change = Math.round((newRate - m.yesterday) * 100) / 100;
+  m.changePct = Math.round((m.change / m.yesterday) * 10000) / 100;
+  m.lastUpdated = new Date().toISOString();
+  m.history.push({ date: document.getElementById('dateInput').value, rate: newRate });
+  currentData.updated = new Date().toISOString();
+  document.getElementById('jsonOutput').value = JSON.stringify(currentData, null, 2);
+});
+
+document.getElementById('copyJsonBtn').addEventListener('click', () => {
+  const ta = document.getElementById('jsonOutput');
+  ta.select();
+  document.execCommand('copy');
+});
+
+if(sessionStorage.getItem('mri-admin') === '1') showPanel();
+</script>
+</body>
+</html>
