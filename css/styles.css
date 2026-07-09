@@ -269,7 +269,7 @@ nav.main-nav a:hover, nav.main-nav a.active{ color:var(--text); border-bottom-co
 .chart-tabs{ display:flex; gap:8px; margin-bottom:18px; }
 .chart-tab{ padding:7px 16px; border-radius:999px; font-size:.8rem; border:1px solid var(--border); color:var(--text-dim); background:transparent; }
 .chart-tab.active{ background:var(--accent); border-color:var(--accent); color:#fff; }
-.chart-wrap{ height:320px; }
+..chart-wrap{ position:relative; height:320px; }
 .metal-switcher{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
 .metal-pill{ padding:7px 14px; border-radius:999px; font-size:.8rem; border:1px solid var(--border); color:var(--text-dim); display:flex; align-items:center; gap:6px; }
 .metal-pill .dot{ width:7px; height:7px; border-radius:50%; }
